@@ -1,0 +1,9 @@
+test:
+  dataset: "EuRoC"
+
+perturbation:
+  save_frequency: 100
+  # noise_type: "gaussian"
+  save_image: true
+  save_perturbed_bag: true
+  work_dir: "/home/lidonghao/ws/covins_ws/src/ablation_perturbation"

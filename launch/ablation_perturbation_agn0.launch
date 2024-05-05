@@ -1,0 +1,12 @@
+<launch>
+    <!-- Define any necessary arguments -->
+    <arg name="agent_number" default="0" />
+    <arg name="severity" default="1" />
+
+    <!-- Launch the rosbag play command with the specified bag file -->
+    <node name="rosbag_player" pkg="rosbag" type="play" args="MH_01_easy.bag /cam0/image_raw:=/cam0/image_raw0 /cam1/image_raw:=/cam1/image_raw0 /imu0:=/imu0 --start ${arg start_time}"  output="screen" />
+
+    <!-- Launch the perturbation node simultaneously -->
+    <node name="rosbag_perturbation_n${arg agent_number}" pkg="ablation_perturbation" type="perturbation.py" output="screen" args="$(arg agent_number) $(arg save_dir) $(arg save_frequency) $(arg p_std)" launch-prefix="roslaunch"/>
+
+</launch>
