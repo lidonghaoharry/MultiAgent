@@ -1,7 +1,15 @@
 # This repo serves as Multi-Agent SLAM Robustness Evaluation Framwork， in ROS package format
-# The frameworks is engineered to 1. detect noise occurrences in real-time during executing multi-agent SLAM system, 2. evaluate noise level, 3. denoise and repair received data automatically covering the most common noise types. This significantly boost the accuracy and reliability of multi-agent SLAM operations especially when one of the robot being attacted.The proposed solution not only promises to reduce the downtime and manual intervention typically required in current practices but also paves the way for more resilient robotic navigation and mapping in complex, unstructured settings. This framework is poised to serve as an indispensable tool in advancing the field of robotics, ensuring more stable and effective deployments of multi-agent systems in diverse operational contexts. 
+The frameworks is engineered to 1. detect noise occurrences in real-time during executing multi-agent SLAM system, 2. evaluate noise level, 3. denoise and repair received data automatically covering the most common noise types. This significantly boost the accuracy and reliability of multi-agent SLAM operations especially when one of the robot being attacted.The proposed solution not only promises to reduce the downtime and manual intervention typically required in current practices but also paves the way for more resilient robotic navigation and mapping in complex, unstructured settings. This framework is poised to serve as an indispensable tool in advancing the field of robotics, ensuring more stable and effective deployments of multi-agent systems in diverse operational contexts. 
 
-## Package contains: 
+## Index
+    - [1 Package structure](#package-structure)
+    - [2 Instruction](#instruction)
+        -[IMPORTANT NOTE](#important-note)
+        -[Enviornment Setup](#environment-setup)
+        -[If manual perturbation needed](#if-manually-perturbation-is-needed-for-robustness-evaluation)
+        -[Run Evaluation](#to-run-evaluation-directly-along-with-covins-g-and-orb-slam-we-provide-a-bash-script-to-run-and-compare-two-agent-synchronizely-make-sure-to-edit-the-configs-correspondingly)
+
+## Package structure: 
 
 ```bash
 # main folder contains all functions implemented 
@@ -29,14 +37,16 @@ Ablation_Perturbation
 ```
 
 
-## To run the framework: 
-### IMPORTANT NOTE: The whole package is build based on [COVINS-G](https://github.com/VIS4ROB-lab/covins), a remarkable generic collaborative SLAM system, and it should be placed inside of the ROS workspace downloaded and build by following the instructions from COVINS-G. <br />
-### Environment  Setup: Follow [COVINS-G](https://github.com/VIS4ROB-lab/covins) 'Enviornment Setup' and 'COVINS Installation' sections. Then install ROS Support for the ORB-SLAM3 Front-End (More front-end options can be found in COINS-G page)
+## Instruction: 
+### IMPORTANT NOTE: 
+The whole package is build based on [COVINS-G](https://github.com/VIS4ROB-lab/covins), a remarkable generic collaborative SLAM system, and it should be placed inside of the ROS workspace downloaded and build by following the instructions from COVINS-G. <br />
+### Environment Setup: 
+* Follow [COVINS-G](https://github.com/VIS4ROB-lab/covins) 'Enviornment Setup' and 'COVINS Installation' sections. Then install ROS Support for the ORB-SLAM3 Front-End (More front-end options can be found in COINS-G page)
 
-### Clone this package inside COVINS ROS workspace, ```~/ws/covins_ws/src``` by default. 
+* Clone this package inside COVINS ROS workspace, ```~/ws/covins_ws/src``` by default. 
 
 ### If manually perturbation is needed for robustness evaluation:  
-#### Recommended: Perturb the ROS bag first and play the perturbed ROS bag during COVINS-G to ensure the best synchronization performance
+**Recommended**: Perturb the ROS bag first and play the perturbed ROS bag during COVINS-G to ensure the best synchronization performance
 * Make sure the [EuRoC data](https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets) (in bag format) is downloaded. 
 * Edit configs in the corresponding bash files inside ```Examples``` directory: 
     * ```BAG_PATH```, ```output_path```, ```perturb_result```, ```overall_log_path``` are paths to retrieve data, save the output, and log information
@@ -52,4 +62,9 @@ Ablation_Perturbation
 ```bash
 ./ablation_perturbation/Examples/perturb_2_agents.sh # The results will be save in perturb_result
 ```
+<a name="evaluation"></a>
+
+## Reference
+[COVINS](https://github.com/VIS4ROB-lab/covins): A (Generic) Framework for Collaborative Visual-Inertial SLAM and Multi-Agent 3D Mapping
+[DPIR](https://github.com/cszn/DPIR): Deep Plug-and-Play Image Restoration
 
