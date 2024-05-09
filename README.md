@@ -2,12 +2,12 @@
 The frameworks is engineered to 1. detect noise occurrences in real-time during executing multi-agent SLAM system, 2. evaluate noise level, 3. denoise and repair received data automatically covering the most common noise types. This significantly boost the accuracy and reliability of multi-agent SLAM operations especially when one of the robot being attacted.The proposed solution not only promises to reduce the downtime and manual intervention typically required in current practices but also paves the way for more resilient robotic navigation and mapping in complex, unstructured settings. This framework is poised to serve as an indispensable tool in advancing the field of robotics, ensuring more stable and effective deployments of multi-agent systems in diverse operational contexts. 
 
 ## Index
-    - [1 Package structure](#package-structure)
-    - [2 Instruction](#instruction)
-        -[IMPORTANT NOTE](#important-note)
-        -[Enviornment Setup](#environment-setup)
-        -[If manual perturbation needed](#if-manually-perturbation-is-needed-for-robustness-evaluation)
-        -[Run Evaluation](#to-run-evaluation-directly-along-with-covins-g-and-orb-slam-we-provide-a-bash-script-to-run-and-compare-two-agent-synchronizely-make-sure-to-edit-the-configs-correspondingly)
+  - [1 Package structure](#package-structure)
+  - [2 Instruction](#instruction)
+    - [IMPORTANT NOTE](#important-note)
+    - [Enviornment Setup](#environment-setup)
+    - [If manual perturbation needed](#if-manually-perturbation-is-needed-for-robustness-evaluation)
+    - [Run Evaluation](#to-run-evaluation-directly-along-with-covins-g-and-orb-slam-we-provide-a-bash-script-to-run-and-compare-two-agent-synchronizely-make-sure-to-edit-the-configs-correspondingly)
 
 ## Package structure: 
 
