@@ -1,6 +1,7 @@
 # This repo serves as Multi-Agent SLAM Robustness Evaluation Framwork， in ROS package format
+# The frameworks is engineered to 1. detect noise occurrences in real-time during executing multi-agent SLAM system, 2. evaluate noise level, 3. denoise and repair received data automatically covering the most common noise types. This significantly boost the accuracy and reliability of multi-agent SLAM operations especially when one of the robot being attacted.The proposed solution not only promises to reduce the downtime and manual intervention typically required in current practices but also paves the way for more resilient robotic navigation and mapping in complex, unstructured settings. This framework is poised to serve as an indispensable tool in advancing the field of robotics, ensuring more stable and effective deployments of multi-agent systems in diverse operational contexts. 
 
-## File structure in: 
+## Package contains: 
 
 ```bash
 # main folder contains all functions implemented 
@@ -26,47 +27,29 @@ Ablation_Perturbation
     |- post_proc.py            # Compare two experiments
     |- test.yaml               # test configs
 ```
-## If you already have ROS workspace, just pull out only the packages (default: base_local_planner, jackal_gps_navigation) and cooresponding launch and config files, and put them into your workspace and build with `catkin_make`. <br />
-## To start:  
-ROS should be initialized already as Jackal boots up <br />
 
-1. Connect to NovAtel and make sure get GPS-RTK (you can use software in Downloads\NovAtelApplicationSuite_1-15-0_Linux\NovAtelApplicationSuite_64bit.AppImage) <br />
-2. Launch novatel ROS driver <br />
 
+## To run the framework: 
+### IMPORTANT NOTE: The whole package is build based on [COVINS-G](https://github.com/VIS4ROB-lab/covins), a remarkable generic collaborative SLAM system, and it should be placed inside of the ROS workspace downloaded and build by following the instructions from COVINS-G. <br />
+### Environment  Setup: Follow [COVINS-G](https://github.com/VIS4ROB-lab/covins) 'Enviornment Setup' and 'COVINS Installation' sections. Then install ROS Support for the ORB-SLAM3 Front-End (More front-end options can be found in COINS-G page)
+
+### Clone this package inside COVINS ROS workspace, ```~/ws/covins_ws/src``` by default. 
+
+### If manually perturbation is needed for robustness evaluation:  
+#### Recommended: Perturb the ROS bag first and play the perturbed ROS bag during COVINS-G to ensure the best synchronization performance
+* Make sure the [EuRoC data](https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets) (in bag format) is downloaded. 
+* Edit configs in the corresponding bash files inside ```Examples``` directory: 
+    * ```BAG_PATH```, ```output_path```, ```perturb_result```, ```overall_log_path``` are paths to retrieve data, save the output, and log information
+    * ```TEST_AGENTS```, ```Perturb_agent```, ```METHODS```, ```frequency```, ```duration```, ```denoise``` are parameters for perturbation
+* Change the ```Experiment``` name and make sure the consistency across all bashfiles for the same experiment
+* Run bag perturbation: 
+    * ``` cd ~/ws/covins_ws/src ```
+    * ``` ./ablation_perturbation/Examples/perturb_bags.sh ```
+    * The perturbed ROS bag will be saved in ```perturb_result``` named ```perturbed_images.bag```
+* Run bag denosie, if needed, to test denoise algorithms: ```denoise``` set to 1 then rerun the previous steps
+
+### To run evaluation directly along with COVINS-G and ORB-SLAM, we provide a bash script to run and compare two agent synchronizely (make sure to edit the configs correspondingly):
 ```bash
-roslaunch novatel_oem7_driver oem7_tty.launch
+./ablation_perturbation/Examples/perturb_2_agents.sh # The results will be save in perturb_result
 ```
 
-3. Launch navsat_transfer_node to fuse GPS into EKF Localization
-
-```bash
-roslaunch robot_localization navsat_transform_template.launch
-```
-
-4. Edit or double-check navigation configurations in `path_follow_params.yaml` <br />
-
-PathFollower:<br />
-  - pre_traj_frame: Frame of pre-defined trajectory # (utm or odom)<br />
-  - pre_traj: Predefined trajectory in pre_traj_frame # ex: [[x1, y1, w1], [x2, y2, w2],[x3, y3, w3]]<br />
-  - duration: Sim time for local planner # ex: 2.0<br />
-  - waypoint_factor: How many waypoints that UGV  will go in next 1 second # ex: 2<br />
-  - time_spaced: True if send time spaced waypoints, otherwise send distance spaced waypoints<br />
-output_dir: Output directory for logging sent plans, if None, no logging<br />
-
-5. Start navigating <br />
-
-```bash
-cp ~/cpr_noetic_ws
-source ./devel/setup.bash 
-roslaunch jackal_gps_navigation path_follower.launch
-
-```
-
-## Tests left to be done *** :  
-These are not tested and ran after implementation because I couldn't get RTK correction on GPS. There must be bugs, please fix them. 
-1. Check if `GPS time` is calculated correctly and updated all the time <br />
-2. Have not tested the `UTM` <-> `odom` transform yet <br />
-3. Need to check if `current velocity` is updated frequently enough <br />
-4. `UTM`  <-> `GPS` (if function pyproj.Proj() works) <br />
-5. Not sure if transformation between `UTM`  <->  `odom` provided by navsat_transfer_node is correct or available all the time <br />
-6. Need to test the accuracy of calculation of `UTM` <-> `odom` <br />
