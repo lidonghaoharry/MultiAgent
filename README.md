@@ -49,8 +49,18 @@ The whole package is build based on [COVINS-G](https://github.com/VIS4ROB-lab/co
 **Recommended**: Perturb the ROS bag first and play the perturbed ROS bag during COVINS-G to ensure the best synchronization performance
 * Make sure the [EuRoC data](https://projects.asl.ethz.ch/datasets/doku.php?id=kmavvisualinertialdatasets) (in bag format) is downloaded. 
 * Edit configs in the corresponding bash files inside ```Examples``` directory: 
-    * ```BAG_PATH```, ```output_path```, ```perturb_result```, ```overall_log_path``` are paths to retrieve data, save the output, and log information
-    * ```TEST_AGENTS```, ```Perturb_agent```, ```METHODS```, ```frequency```, ```duration```, ```denoise``` are parameters for perturbation
+    * Directory paths: 
+        * ```BAG_PATH```: dataset bags dir path
+        * ```output_path```: default COVINS-G output path
+        * ```perturb_result```: output dir path
+        * ```overall_log_path```: log file save dir path
+    * Parameters for perturbation
+        * ```TEST_AGENTS```: Name of the agents to compare ex: "MH_01_easy" "MH_02_easy" for EuRoC
+        * ```Perturb_agent```: Index of agent that is perturbed
+        * ```METHODS```: Perturbation methods
+        * ```frequency```: Frequency of perturbation
+        * ```duration```: Duration of perturbation (number of frames)
+        * ```denoise```: set 1 to denoise
 * Change the ```Experiment``` name and make sure the consistency across all bashfiles for the same experiment
 * Run bag perturbation: 
     * ``` cd ~/ws/covins_ws/src ```
@@ -65,6 +75,6 @@ The whole package is build based on [COVINS-G](https://github.com/VIS4ROB-lab/co
 <a name="evaluation"></a>
 
 ## Reference
-[COVINS](https://github.com/VIS4ROB-lab/covins): A (Generic) Framework for Collaborative Visual-Inertial SLAM and Multi-Agent 3D Mapping
-[DPIR](https://github.com/cszn/DPIR): Deep Plug-and-Play Image Restoration
+[COVINS](https://github.com/VIS4ROB-lab/covins): A (Generic) Framework for Collaborative Visual-Inertial SLAM and Multi-Agent 3D Mapping <br />
+[DPIR](https://github.com/cszn/DPIR): Deep Plug-and-Play Image Restoration <br />
 
