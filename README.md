@@ -1,4 +1,4 @@
-# This repo serves as Multi-Agent SLAM Robustness Evaluation Framwork， in ROS package format
+# Multi-Agent SLAM Robustness Evaluation Framwork
 The frameworks is engineered to 1. detect noise occurrences in real-time during executing multi-agent SLAM system, 2. evaluate noise level, 3. denoise and repair received data automatically covering the most common noise types. This significantly boost the accuracy and reliability of multi-agent SLAM operations especially when one of the robot being attacted.The proposed solution not only promises to reduce the downtime and manual intervention typically required in current practices but also paves the way for more resilient robotic navigation and mapping in complex, unstructured settings. This framework is poised to serve as an indispensable tool in advancing the field of robotics, ensuring more stable and effective deployments of multi-agent systems in diverse operational contexts. 
 
 ## Index
@@ -44,6 +44,7 @@ The whole package is build based on [COVINS-G](https://github.com/VIS4ROB-lab/co
 * Follow [COVINS-G](https://github.com/VIS4ROB-lab/covins) 'Enviornment Setup' and 'COVINS Installation' sections. Then install ROS Support for the ORB-SLAM3 Front-End (More front-end options can be found in COINS-G page)
 
 * Clone this package inside COVINS ROS workspace, ```~/ws/covins_ws/src``` by default. 
+* Build the workspace again use: ```catkin make```
 
 ### If manually perturbation is needed for robustness evaluation:  
 **Recommended**: Perturb the ROS bag first and play the perturbed ROS bag during COVINS-G to ensure the best synchronization performance
