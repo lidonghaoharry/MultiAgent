@@ -1,11 +1,12 @@
 #!/bin/bash
 dataset="EuRoC"
-BAG_PATH="/home/lidonghao/MultiAgent/data/EuRoC"
+BAG_PATH="/home/lidonghao/MultiAgent/data/EuRoC" # Change this to your dataset directory
+WS_PATH="/home/lidonghao/ws/covins_ws/src"  # Change this to your workspace directory
+output_path="${WS_PATH}/covins/covins_backend/output/" # This is default output path for COVINS-G, change it if you have different output path
 TEST_AGENTS=("MH_01_easy" "MH_02_easy")
 Perturb_agent=0
 # METHODS=(""gaussian_blur" "defocus_blur" "fog" "frost" 
 # "contrast" "brightness" "snow" "spatter")
-output_path="/home/lidonghao/ws/covins_ws/src/covins/covins_backend/output/"
 Experiment="Perturb_n0_bmethods"
 
 # overall_log_path="${output_path}${Experiment}/experiment_log.csv"

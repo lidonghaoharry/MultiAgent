@@ -52,9 +52,9 @@ The whole package is build based on [COVINS-G](https://github.com/VIS4ROB-lab/co
 * Edit configs in the corresponding bash files inside ```Examples``` directory: 
     * Directory paths: 
         * ```BAG_PATH```: dataset bags dir path
+        * ```WS_PATH```: workspace dir path
         * ```output_path```: default COVINS-G output path
-        * ```perturb_result```: output dir path
-        * ```overall_log_path```: log file save dir path
+        * ```perturb_result```: perturbation result path
     * Parameters for perturbation
         * ```TEST_AGENTS```: Name of the agents to compare ex: "MH_01_easy" "MH_02_easy" for EuRoC
         * ```Perturb_agent```: Index of agent that is perturbed
